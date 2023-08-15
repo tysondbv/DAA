@@ -1,0 +1,37 @@
+def bellmanFord(edgeList,V):
+    dist = [float('inf') for _ in range(V)]
+    dist[0]=0
+    for i in range(V-1): # if the graph is of 6 vertices should be processed 5 times so
+        for edge in edgeList:
+            u,v,w = edge
+            u = ord(u)-97
+            v = ord(v)-97
+            dist[v] = min(dist[v],dist[u]+w)
+    return dist
+
+
+if __name__ == "__main__":
+    # An edge list containing all the edges in the form: (from, to, weight)
+    edgeList = [('a','b',-4), 
+                ('a','f',-3),
+                ('b','d',-1),
+                ('b','e',-2), 
+                ('c','b',8),
+                ('c','f',3),
+                ('d','a',6), 
+                ('d','f',4), 
+                ('e','c',-3),
+                ('e','f',2)]
+    
+    # No. of vertices in the graph
+    V = 6
+
+    # Function call
+    dist = bellmanFord(edgeList, V)
+
+    # To store the characters according to index
+    temp = "abcdef"
+
+    print("Distances from a: ")
+    for i in range(V):
+        print(f"{temp[i]} : {dist[i]}")
